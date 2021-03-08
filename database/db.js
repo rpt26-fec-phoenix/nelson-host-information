@@ -20,7 +20,8 @@ let hostSchema = new mongoose.Schema({
 let Host = mongoose.model('Host', hostSchema);
 
 let seedHostDB = () => {
-  for (let i = 0; i < 50; i++) {
+  return new Promise((resolve, reject) => {
+    for (let i = 0; i < 50; i++) {
     let newHost = new Host({
       hostName: faker.name.findName(),
       dateJoined: faker.date.month() + ' 2021',
@@ -31,9 +32,27 @@ let seedHostDB = () => {
       isSuperhost: faker.random.boolean(),
       listingID: faker.random.number(100)
     });
-    Host.create(newHost);
+    resolve(Host.create(newHost));
+    reject('Error with seeding the Host DB')
+    }
+  });
+}
+
+let refreshHostDB = () => {
+  return new Promise((resolve, reject) => {
+    resolve(Reviews.deleteMany({}))
+  })
+}
+
+async function runHostSeed() {
+  try {
+    await refreshHostDB()
+    await seedHostDB()
+    console.log('Host DB seeded successfully.');
+  } catch (err) {
+    console.log('Error with seeding DB')
   }
 }
 
-seedHostDB();
+runHostSeed();
 // db.host.deleteMany({});
