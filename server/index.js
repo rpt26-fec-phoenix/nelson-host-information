@@ -12,9 +12,9 @@ app.get('/:listingID/host', (req, res) => {
   db.getHostInfo(req.params.listingID).then((host) => {
     res.send(host);
   }).catch((error) =>{
-    console.log(error)
+    console.log(error);
     res.end();
-  })
+  });
 });
 
 app.listen(PORT, () => {
