@@ -21,16 +21,16 @@ let Host = mongoose.model('Host', hostSchema);
 
 let seedHostDB = () => {
   return new Promise((resolve, reject) => {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i <= 100; i++) {
     let newHost = new Host({
       hostName: faker.name.findName(),
       dateJoined: faker.date.month() + ' 2021',
-      profilePic: 'Insert SW url here',
+      profilePic: `https://airbnbpp.s3-us-west-1.amazonaws.com/${faker.random.number({min:0, max:199})}.jpg`,
       hostDescription: faker.lorem.sentences(3),
       reviewCount: faker.random.number(1000),
       isVerified: faker.random.boolean(),
       isSuperhost: faker.random.boolean(),
-      listingID: faker.random.number(100)
+      listingID: i
     });
     resolve(Host.create(newHost));
     reject('Error with seeding the Host DB')
@@ -40,9 +40,17 @@ let seedHostDB = () => {
 
 let refreshHostDB = () => {
   return new Promise((resolve, reject) => {
-    resolve(Reviews.deleteMany({}))
+    resolve(Host.deleteMany({}))
   })
 }
+
+let getHostInfo = (listingID) => {
+  return new Promise((resolve, reject) => {
+    resolve(Host.find({}).where('listingID').equals(listingID));
+    reject('Error with getting this listings host information.')
+  })
+}
+
 
 async function runHostSeed() {
   try {
@@ -54,5 +62,5 @@ async function runHostSeed() {
   }
 }
 
-runHostSeed();
-// db.host.deleteMany({});
+module.exports = {runHostSeed, getHostInfo};
+
