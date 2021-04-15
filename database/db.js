@@ -26,8 +26,8 @@ let seedHostDB = () => {
       hostName: faker.name.findName(),
       dateJoined: faker.date.month() + ' 2021',
       profilePic: `https://airbnbpp.s3-us-west-1.amazonaws.com/${faker.random.number({min:0, max:199})}.jpg`,
-      hostDescription: faker.lorem.sentences(3),
-      reviewCount: faker.random.number(1000),
+      hostDescription: faker.lorem.sentences(6),
+      reviewCount: faker.random.number(100),
       isVerified: faker.random.boolean(),
       isSuperhost: faker.random.boolean(),
       listingID: i
