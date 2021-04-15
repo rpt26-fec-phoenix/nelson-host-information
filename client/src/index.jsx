@@ -73,17 +73,17 @@ class App extends React.Component {
             width: '64px',
             background: 'white',
             display: 'inline-block',
-            position: 'absolute'
           }}
           src={this.state.profilePic}/>
-          <div style={{marginTop: '3%', marginLeft: '70px', marginBottom: '25px'}}>
+          {this.state.isSuperhost ? <SuperhostBadge /> : null}
+          <div style={{marginTop: '3%', marginLeft: '5px', marginBottom: '25px'}}>
             <HostNameStyle>{'Hosted by ' + this.state.hostName}</HostNameStyle>
             <HostJoinedDateStyle>{'Joined in ' + this.state.dateJoined}</HostJoinedDateStyle>
           </div>
         </div>
         <div style={{display: 'flex'}}>
           <div>
-            <div style={{display: 'inline-flex', width: '100%', boxSizing: 'content-box'}}>
+            <div style={{display: 'inline-flex', width: '60%', boxSizing: 'content-box'}}>
               <StarIcon />
               <HostReviews>{this.state.reviewCount + ' Reviews'}</HostReviews>
               {!this.state.isVerified ? <div style={{display: 'flex'}}><VerifiedIcon/> <HostVerified>Identity Verified</HostVerified></div> : null}
@@ -143,7 +143,6 @@ const HostDescriptionStyle = styled.div `
   margin-top: 15px;
   padding-right: 19%;
   width: 60%;
-  white-space: pre-wrap;
 `;
 
 const HostReviews = styled.div `
