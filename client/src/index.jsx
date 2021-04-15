@@ -66,17 +66,17 @@ class App extends React.Component {
         marginLeft: '10%',
         marginRight: '10%'
       }}>
-        <div style={{display: 'inline-flex'}}>
+        <div style={{display: 'inline-flex', position: 'relative'}}>
           <img style={{
             borderRadius: '56%',
             height: '64px',
             width: '64px',
             background: 'white',
-            display: 'inline-block',
+            display: 'inline-block'
           }}
           src={this.state.profilePic}/>
           {this.state.isSuperhost ? <SuperhostBadge /> : null}
-          <div style={{marginTop: '3%', marginLeft: '5px', marginBottom: '25px'}}>
+          <div style={{marginTop: '3%', marginLeft: '15px', marginBottom: '25px'}}>
             <HostNameStyle>{'Hosted by ' + this.state.hostName}</HostNameStyle>
             <HostJoinedDateStyle>{'Joined in ' + this.state.dateJoined}</HostJoinedDateStyle>
           </div>
