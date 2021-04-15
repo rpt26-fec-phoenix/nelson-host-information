@@ -83,7 +83,7 @@ class App extends React.Component {
           <div style={{display: 'inline-flex', width: '100%'}}>
             <StarIcon />
             <HostReviews>{this.state.reviewCount + ' Reviews'}</HostReviews>
-            {this.state.isVerified ? <div style={{display: 'flex'}}><VerifiedIcon/> <HostVerified>Identity Verified</HostVerified></div> : null}
+            {!this.state.isVerified ? <div style={{display: 'flex'}}><VerifiedIcon/> <HostVerified>Identity Verified</HostVerified></div> : null}
             {this.state.isSuperhost ? <div style={{display: 'flex'}}><SuperhostIcon/> <HostSuperhost>Superhost</HostSuperhost></div> : null}
           </div>
           <div style={{width: '60%'}}>
