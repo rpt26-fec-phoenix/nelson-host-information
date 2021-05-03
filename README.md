@@ -40,8 +40,8 @@ npm install
 ### CRUD Routes - Host Information
 
 - Type : GET
-- Route: /listingID/host
-- Data received :
+  -  Route: /listingID/host
+  - Data received :
     _id : 608c90fc005a76c25c43bb97
     hostName : "Silvia Schaefer Sr."
     dateJoined : "August 2021"
@@ -55,8 +55,8 @@ npm install
 
 
 - Type: POST
-- Route: /id/add
-- Data Sent
+  - Route: /id/add
+  - Data Sent
     _id : 608c90fc005a76c25c43bb97
     hostName : "Silvia Schaefer Sr."
     dateJoined : "August 2021"
@@ -70,11 +70,11 @@ npm install
 
 
 - Type: Update
-- Route : /id/update
-- Expectation: Change any host related information
+  - Route : /id/update
+  - Expectation: Change any host related information
 
 
 - Type: Delete
-- Route : /id/delete
-- Expectation : Delete any host information from table
+  - Route : /id/delete
+  - Expectation : Delete any host information from table
 
