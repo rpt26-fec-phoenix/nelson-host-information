@@ -26,3 +26,10 @@ node_modules/
 *.pem
 *.cer
 *.sh
+
+
+/database/DataSeedingFile.txt
+
+/database/DataSeedingFile.csv
+
+.env

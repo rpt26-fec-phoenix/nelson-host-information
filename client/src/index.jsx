@@ -8,6 +8,8 @@ import SuperhostIcon from './components/SuperhostIcon.jsx';
 import SuperhostBadge from './components/SuperhostBadge.jsx';
 import VerifiedIcon from './components/VerfiedIcon.jsx';
 import PaymentProtectionIcon from './components/PaymentProtectionIcon.jsx';
+import axios from 'axios';
+import faker from 'faker';
 
 
 class App extends React.Component {
@@ -31,20 +33,18 @@ class App extends React.Component {
   getHost() {
     let url = window.location.href;
     let listingID = url.split('/')[3];
-
     $.ajax({
-      url: `/${listingID}/host`,
+      url: `http://localhost:3007/hosts/${listingID}`,
       type: 'GET',
       success: (res) => {
-        console.log(res);
         this.setState({
-          hostName: res[0].hostName,
-          dateJoined: res[0].dateJoined,
-          hostDescription: res[0].hostDescription,
-          isSuperhost: res[0].isSuperhost,
-          isVerified: res[0].isVerified,
-          profilePic: res[0].profilePic,
-          reviewCount: res[0].reviewCount
+          hostName: res[0].host_name,
+          dateJoined: res[0].date_joined,
+          hostDescription: res[0].host_description,
+          isSuperhost: res[0].is_superhost,
+          isVerified: res[0].is_verified,
+          profilePic: res[0].profile_pic,
+          reviewCount: res[0].review_count
         });
       },
       error: (err)=>{
@@ -53,6 +53,49 @@ class App extends React.Component {
     });
   }
 
+  addHost() {
+    let url = window.location.href;
+    let listingID = url.split('/')[3];
+
+    axios.post(`/${listingID}/add`, {
+      hostName: faker.name.findName(),
+      dateJoined: faker.date.month() + ' 2021',
+      profilePic: `https://airbnbpp.s3-us-west-1.amazonaws.com/${faker.random.number({min: 0, max: 199})}.jpg`,
+      hostDescription: faker.lorem.sentences(6),
+      reviewCount: faker.random.number(100),
+      isVerified: faker.random.boolean(),
+      isSuperhost: faker.random.boolean(),
+    })
+      .then(response => console.log(response))
+      .catch(err => console.log(err));
+  }
+
+  deleteHost() {
+    axios.delete(`/${10}/delete`)
+      .then(response => console.log(response))
+      .catch(err => console.log(err));
+  }
+
+  updateHost() {
+    var id = faker.random.number({
+      'min': 10,
+      'max': 50
+    });
+
+    axios.post(`/${listingID}/update`, {
+      hostName: faker.name.findName(),
+      dateJoined: faker.date.month() + ' 2021',
+      profilePic: `https://airbnbpp.s3-us-west-1.amazonaws.com/${faker.random.number({min: 0, max: 199})}.jpg`,
+      hostDescription: faker.lorem.sentences(6),
+      reviewCount: faker.random.number(100),
+      isVerified: faker.random.boolean(),
+      isSuperhost: faker.random.boolean(),
+      id: id,
+    })
+      .then(response => console.log(response))
+      .catch(err => console.log(err));
+
+  }
 
   render() {
     return (
